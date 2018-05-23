@@ -37,11 +37,12 @@ post '/callback' do
                             res = Net::HTTP.get_response(uri)
                             returned_json = JSON.parse(res.body)
                             response_stores =  returned_json["rest"]
+                            if response_stores.nil?
+                                response_message = "近くにお店がありませんでした..."
+                            end
                             selected_store = response_stores[rand(response_stores.length)]
                             
-                            if selected_store == ""
-                                response_message = "近くにお店はありませんでした..."
-                            else
+                            if response_message.nil?
                                 response_message = "チーズが選んだお店はこれ！\n" + selected_store["name"] + "\n" + selected_store["address"] + "\n" + selected_store["url_mobile"] 
                             end
                             
