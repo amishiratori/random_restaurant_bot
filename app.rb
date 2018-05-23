@@ -39,7 +39,7 @@ post '/callback' do
                             response_stores =  returned_json["rest"]
                             selected_store = response_stores[rand(response_stores.length)]
                             
-                            if selected_store.nil?
+                            if selected_store == ""
                                 response_message = "近くにお店はありませんでした..."
                             else
                                 response_message = "チーズが選んだお店はこれ！\n" + selected_store["name"] + "\n" + selected_store["address"] + "\n" + selected_store["url_mobile"] 
