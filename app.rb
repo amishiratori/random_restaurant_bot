@@ -8,8 +8,8 @@ require 'line/bot'
 
 def client 
     @client ||= Line::Bot::Client.new { |config|
-        config.channel_secret = "0303e7c0bb92312850a7dc0d5dc0399d"
-        config.channel_token = "Om1erElbI3CnOZO6VHux6P7FzOKza4a1JireDCTqleHIN5Wi/zgmqeO0v9cVEq7mPPzqMsu9YbY1Y24EeJe3ngGo5qTOOg5Iyi0lo9SjWbfQ1oZWQhfFOLT0XCMwcYo7Il8Ewp5GZX9kN+UkYSDfMwdB04t89/1O/w1cDnyilFU="
+        config.channel_secret = ENV['LINE_CHANNEL_SECRET']
+        config.channel_token = ENV['LINE_CHANNEL_TOKEN']
     }
 end
 
@@ -29,7 +29,7 @@ post '/callback' do
                             longitude = event.message["longitude"]
                             uri = URI('http://api.gnavi.co.jp/RestSearchAPI/20150630/')
                             uri.query = URI.encode_www_form({
-                                keyid: '833331ed51f16c521649f7a051db7332',
+                                keyid: ENV['GNAVI_KEY'],
                                 format: 'json',
                                 latitude: latitude,
                                 longitude: longitude
